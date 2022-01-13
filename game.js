@@ -24,9 +24,14 @@ Player.prototype.draw = function() {
     context.fillRect(this.x, this.y, this.width, this.height);
 };
 
-Player.prototype.update = function() {
-    this.y = this.y+this.direction;
-    if(this.y <= 0 || this.y+this.height >= canvas.height) {
+// Player.prototype.update = function() {
+//     this.y = this.y+this.direction;
+//     if(this.y <= 0 || this.y+this.height >= canvas.height) {
+//         this.direction *= -1;
+//     }
+// }; too
+Player.prototype.update = function () {
+    if( this.y <= 0 || this.y+this.height >= game.gameFieldHeight()){
         this.direction *= -1;
     }
 };
@@ -44,17 +49,25 @@ Enemy.prototype.draw = function () {
     context.fillRect(this.x, this.y, this.width, this.height);
 };
 
+// Enemy.prototype.update = function () {
+//     this.y = this.y+this.direction;
+//     if(this.y<= 0 || this.y+this.height>=canvas.height){
+//         this.direction *= -1;
+//     }
+// }; too this
+
 Enemy.prototype.update = function () {
-    this.y = this.y+this.direction;
-    if(this.y<= 0 || this.y+this.height>=canvas.height){
+    if(this.y<= 0 || this.y+this.height>=game.gameFieldHeight()){
         this.direction *= -1;
     }
 };
 
+//declared the player and enemys as well as there x,y starting positions
 var player = new Player(100, 175);
 var enemy1 = new Enemy(20, 25);
 var enemy2 = new Enemy(80, 25);
 var enemy3 = new Enemy(160, 25);
+
 
 function frameUpdate() {
     canvas = document.getElementById("game-layer");
